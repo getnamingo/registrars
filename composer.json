@@ -1,0 +1,20 @@
+{
+  "name": "namingo/registrars",
+  "description": "A unified PHP library for working with multiple domain registrars through one consistent API.",
+  "type": "library",
+  "keywords": ["php","framework", "upf", "domains", "tld", "ICANN"],
+  "license": "MIT",
+  "authors": [
+      {
+          "name": "Taras Kondratyuk",
+          "email": "help@namingo.org"
+      }
+  ],
+  "autoload": {
+      "psr-4": {"Namingo\\Registrars\\": "src/"}
+  },
+  "require": {
+      "php": ">=8.3",
+      "utopia-php/validators": "0.*"
+  }
+}
