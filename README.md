@@ -305,7 +305,7 @@ Do not expose registrar credentials, API responses containing private data, or i
 
 ## Creating an adapter
 
-Registrar integrations are implemented as adapters. A new adapter should implement the library's registrar adapter contract and translate the common Namingo Registrar operations into requests supported by the upstream provider.
+Registrar integrations are implemented as adapters. A new adapter should implement the library's registrar adapter contract and translate the common Namingo Registrars operations into requests supported by the upstream provider.
 
 An adapter is responsible for:
 
@@ -313,7 +313,7 @@ An adapter is responsible for:
 - API request construction
 - Provider-specific response parsing
 - Error normalization
-- Mapping provider data to Namingo Registrar objects
+- Mapping provider data to Namingo Registrars objects
 - Distinguishing test and production environments
 
 Provider-specific behavior should remain inside the adapter so applications can continue using the same public interface.
