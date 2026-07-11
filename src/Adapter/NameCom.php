@@ -540,19 +540,43 @@ class NameCom extends Adapter
      */
     public function updateDomain(string $domain, UpdateDetails $details): bool
     {
-        if ($details->autoRenew === null) {
-            throw new DomainsException('Details must include autoRenew', 400);
+        $data = [];
+
+        if ($details->autoRenew !== null) {
+            $data['autorenewEnabled'] = $details->autoRenew;
+        }
+
+        if ($details->privacy !== null) {
+            $data['privacyEnabled'] = $details->privacy;
+        }
+
+        if ($details->locked !== null) {
+            $data['locked'] = $details->locked;
+        }
+
+        if ($data === []) {
+            throw new DomainsException(
+                'Details must include autoRenew, privacy, or locked',
+                400,
+            );
         }
 
         try {
-            $this->send('PATCH', "/core/v1/domains/{$domain}", [
-                'autorenewEnabled' => $details->autoRenew,
-            ]);
+            $this->send(
+                'PATCH',
+                "/core/v1/domains/{$domain}",
+                $data,
+            );
+
             return true;
         } catch (RateLimitException | DomainsException $e) {
             throw $e;
         } catch (Exception $e) {
-            throw new DomainsException("Failed to update domain: " . $e->getMessage(), $e->getCode(), $e);
+            throw new DomainsException(
+                'Failed to update domain: ' . $e->getMessage(),
+                $e->getCode(),
+                $e,
+            );
         }
     }
 
